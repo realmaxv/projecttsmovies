@@ -18,22 +18,32 @@ const filmeScience = movies2.filter(film=> film[4].some(genreNew=>genreNew.toLow
 const filmeHorror = movies2.filter(film=> film[4].some(genreNew=>genreNew.toLowerCase().includes('horror')));
 const filmeDrama = movies2.filter(film=> film[4].some(genreNew=>genreNew.toLowerCase().includes('drama')));
 const filmeComedy = movies2.filter(film=> film[4].some(genreNew=>genreNew.toLowerCase().includes('comedy')));
-// let suchArray = [];
 
 
 
-// input.addEventListener("keydown",() => {
-//   let inputFilm= input.value.toLowerCase();
-// if(inputFilm === ""){
+
+function searchMovies(query: string) {
+  return movies2.filter(film => film[0].toLowerCase().includes(query.toLowerCase()));
+}
 
 
-// }else{
-// suchArray.push( movies2.map(item => item[0].includes(inputFilm) ));
+input.addEventListener("keyup", () => {
+  const searchQuery = input.value.trim(); 
+  let filteredMovies = movies2; 
 
-// createProbertyOut(suchArray);
-// }
-// });
+ 
+  if (searchQuery) {
+    filteredMovies = searchMovies(searchQuery);
+  }
 
+ 
+  if (genre.value !== "All") {
+    filteredMovies = filteredMovies.filter(film => film[4].some(genreNew => genreNew.toLowerCase().includes(genre.value.toLowerCase())));
+  }
+
+
+  createProbertyOut(filteredMovies);
+});
 
 
 function createProbertyOut(filmeListe: any[]){
