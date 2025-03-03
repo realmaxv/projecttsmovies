@@ -22,9 +22,14 @@ const filmeComedy = movies2.filter(film=> film[4].some(genreNew=>genreNew.toLowe
 
 
 
-function searchMovies(query: string) {
-  return movies2.filter(film => film[0].toLowerCase().includes(query.toLowerCase()));
-}
+
+
+  function searchMovies(query: string) {
+    return movies2.filter(film => film[0].toLowerCase().includes(query.toLowerCase()));
+  }
+
+
+
 
 
 input.addEventListener("keyup", () => {
@@ -43,6 +48,7 @@ input.addEventListener("keyup", () => {
 
 
   createProbertyOut(filteredMovies);
+  
 });
 
 
@@ -52,6 +58,7 @@ neu.innerHTML =""
 const button1 = document.createElement("button");
 const button2 = document.createElement("button");
 const button3 = document.createElement("button");
+
 button1.className = "yearup";
 button2.className = "yeardown";
 button3.className = "ranking";
@@ -85,12 +92,35 @@ button3.className = "ranking";
 
 
 neu.appendChild(button1);
+
 neu.appendChild(button2);
 neu.appendChild(button3);
 
   output.appendChild(neu);
   output.appendChild(liste);
- 
+  
+  
+
+  button1.addEventListener('click', () => {
+  
+    const sortUp = [...filmeListe].sort((a, b) => a[1] - b[1]);
+    createProbertyOut(sortUp); 
+  });
+
+  button2.addEventListener('click', () => {
+   
+    const sortDown = [...filmeListe].sort((a, b) => b[1] - a[1]);
+    createProbertyOut(sortDown); 
+  });
+
+  button3.addEventListener('click', () => {
+   
+    const sortBest = [...filmeListe].sort((a, b) => b[5] - a[5]);
+    createProbertyOut(sortBest); 
+  });
+
+
+
 }
 
 
